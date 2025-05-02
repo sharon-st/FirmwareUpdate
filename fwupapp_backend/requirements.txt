@@ -1,0 +1,14 @@
+asgiref==3.8.1
+Django==5.1.1
+sqlparse==0.5.1
+tzdata==2024.2
+psycopg2-binary>=2.9
+djangorestframework
+markdown
+django-filter
+django-auth-adfs
+django_extensions
+django-cors-headers
+azure-storage-blob
+django-storages[azure]
+shell

@@ -1,0 +1,47 @@
+services:
+  fwupapp:
+    build:
+      context: ./fwupapp_backend
+      dockerfile: Dockerfile.backend
+    image: fwreg.azurecr.io/django-backend:latest
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./fwupapp_backend:/app
+      - media_storage:/app/media
+      - static_storage:/app/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      - my-postgres
+    env_file: 
+      - ./project.env
+
+
+  my-postgres:
+    image: postgres:13
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file: 
+      - ./project.env
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    image: fwreg.azurecr.io/react-frontend:latest
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:80"
+    depends_on:
+      - fwupapp
+
+
+volumes:
+  pgdata:
+  media_storage:
+  static_storage:

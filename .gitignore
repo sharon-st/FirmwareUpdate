@@ -1,0 +1,75 @@
+# ───────────────────────────────────────────────────────────
+# Python / Django
+# ───────────────────────────────────────────────────────────
+
+# Byte‑compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django runtime artifacts
+*.log
+local_settings.py      # optional per‑machine overrides
+media/                 # user‑uploaded files
+staticfiles/           # collectstatic output
+db.sqlite3             # if you ever use SQLite locally
+
+# Environment files
+.env                   # Django env file (secrets)
+project.env            # legacy env filename
+.env.*                 # any other env variants (e.g. .env.local)
+
+# Virtual environments
+venv/
+env/
+.venv/
+.python-version        # pyenv version file
+
+# ───────────────────────────────────────────────────────────
+# Node.js / React (Create React App)
+# ───────────────────────────────────────────────────────────
+
+# Dependencies
+node_modules/
+
+# Build output
+build/
+dist/
+
+# CRA environment overrides
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ───────────────────────────────────────────────────────────
+# Docker
+# ───────────────────────────────────────────────────────────
+
+# Docker Compose override files (local tweaks)
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Docker environment files (avoid committing secrets)
+*.env
+project.env
+
+# If you mount a host folder for Postgres data, ignore it
+db_data/
+postgres_data/
+
+# ───────────────────────────────────────────────────────────
+# IDEs / Editors / OS
+# ───────────────────────────────────────────────────────────
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Windows
+Thumbs.db
