@@ -12,3 +12,6 @@ django-cors-headers
 azure-storage-blob
 django-storages[azure]
 shell
+azure-monitor-opentelemetry>=1.0.0
+opentelemetry-instrumentation-django>=0.46b0
+
