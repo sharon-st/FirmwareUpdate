@@ -4,6 +4,7 @@ services:
       context: ./fwupapp_backend
       dockerfile: Dockerfile.backend
     image: fwreg.azurecr.io/django-backend:latest
+    restart: always 
     command: >
       sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -20,6 +21,7 @@ services:
 
   my-postgres:
     image: postgres:13
+    restart: always 
     ports:
       - "5433:5432"
     volumes:
@@ -33,10 +35,13 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.frontend
     image: fwreg.azurecr.io/react-frontend:latest
+    restart: always 
     volumes:
       - ./frontend:/app
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - "3000:80"
+      - "443:443"
     depends_on:
       - fwupapp
 

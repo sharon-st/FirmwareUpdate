@@ -9,7 +9,10 @@ const AuthButton = () => {
     const isAuthenticated = accounts.length > 0;
 
     const handleLogin = () => {
-        instance.loginPopup(loginRequest).catch((error) => console.error("Login failed:", error));
+        instance.loginPopup(loginRequest).then(response => {
+            console.log("Login successful:", response);
+            localStorage.setItem("accessToken", response.accessToken);
+        }).catch((error) => console.error("Login failed:", error));
     };
 
     const handleLogout = () => {

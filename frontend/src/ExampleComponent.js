@@ -14,7 +14,7 @@ const ExampleComponent = () => {
 
       const token = response.accessToken;
 
-      const result = await axios.get("http://localhost:8000/api/example/", {
+      const result = await axios.get("https://linkfirmware.duckdns.org/api/firmware-cud/", {
         headers: {
           Authorization: `Bearer ${token}`, 
         },

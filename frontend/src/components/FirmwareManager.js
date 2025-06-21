@@ -57,6 +57,11 @@ const FirmwareManager = () => {
     }));
   };
 
+  // Get the token from localStorage
+  const getToken = () => {
+    return localStorage.getItem("authToken"); // Make sure to set this when the user logs in
+  };
+
   // Handle form submission (Create/Update firmware)
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,10 +74,10 @@ const FirmwareManager = () => {
       });
 
       if (selectedId) {
-        await firmwareAPI.update(selectedId, data);
+        await firmwareAPI.update(selectedId, data, localStorage.getItem("accessToken")); // Pass the token here
         setSuccessMessage("Firmware updated successfully!");
       } else {
-        await firmwareAPI.create(data);
+        await firmwareAPI.create(data,localStorage.getItem("accessToken")); // Pass the token here
         setSuccessMessage("Firmware created successfully!");
       }
 
@@ -99,10 +104,16 @@ const FirmwareManager = () => {
 
   // Handle deleting firmware entry
   const handleDelete = async (id) => {
+    const token = getToken();
+    if (!token) {
+      setError("Authentication token is missing.");
+      return;
+    }
+
     if (window.confirm("Are you sure you want to delete this firmware?")) {
       setLoading(true);
       try {
-        await firmwareAPI.delete(id);
+        await firmwareAPI.delete(id, token); // Pass the token here
         setSuccessMessage("Firmware deleted successfully!");
         fetchFirmwares();
       } catch (err) {
@@ -218,6 +229,7 @@ const FirmwareManager = () => {
 };
 
 export default FirmwareManager;
+
 
 // import React, { useState, useEffect } from "react";
 // import { firmwareAPI } from "../apiService";
